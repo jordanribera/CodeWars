@@ -1,12 +1,10 @@
 import random
 
 def interpret(code):
-    print "<pre>" + code + "</pre>"
     output = ""
     direction = "right"
     directions = ["up", "down", "left", "right"]
     code = code.split("\n")
-    print code
     for x in range(0, len(code)):
         code[x] = list(code[x])
     running = True
@@ -18,7 +16,6 @@ def interpret(code):
     while (running):
         #read pointer location
         value = code[pointerY][pointerX]
-        print value
         
         if (value == "\""):
             stringMode = not stringMode
@@ -89,10 +86,8 @@ def interpret(code):
                 #output
                 if (value == "."):
                     output = output + str(stack.pop())
-                    print "output: " + output
                 if (value == ","):
                     output = output + chr(stack.pop())
-                    print "output: " + output
                     
                 #numbers onto stack
                 if representsInt(value):
@@ -166,8 +161,6 @@ def interpret(code):
                     v = ord(v)
                     
                     stack.append(v)
-                        
-        print stack
         
         #move the pointer
         if (direction == "up"):
