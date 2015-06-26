@@ -1,3 +1,5 @@
+import random
+
 def interpret(code):
     print "<pre>" + code + "</pre>"
     output = ""
@@ -38,7 +40,7 @@ def interpret(code):
                     
                 #advanced flow
                 if (value == "?"):
-                    direction = directions[randint(0,3)]
+                    direction = directions[random.randint(0,3)]
                 if (value == "_"):
                     a = stack.pop()
                     if (a == 0):
@@ -92,7 +94,7 @@ def interpret(code):
                     output = output + chr(stack.pop())
                     print "output: " + output
                     
-                #numers onto stack
+                #numbers onto stack
                 if representsInt(value):
                     stack.append(int(value))
                     
@@ -148,6 +150,22 @@ def interpret(code):
                         stack.append(1)
                     else:
                         stack.append(0)
+                        
+                #p and g
+                if (value == "p"):
+                    y = stack.pop()
+                    x = stack.pop()
+                    v = stack.pop()
+                    
+                    v = chr(v)
+                    code[y][x] = v
+                if (value == "g"):
+                    y = stack.pop()
+                    x = stack.pop()
+                    v = code[y][x]
+                    v = ord(v)
+                    
+                    stack.append(v)
                         
         print stack
         
