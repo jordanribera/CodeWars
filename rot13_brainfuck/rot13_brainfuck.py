@@ -1,4 +1,7 @@
-def brain_luck(code, input):
+import string
+from codecs import encode as _dont_use_this_
+
+def brain_fuck_it(code, input):
     code = list(code)
     input_queue = [0]
     input_queue = list(input)
@@ -65,6 +68,7 @@ def brain_luck(code, input):
 
     return output
 
-code = "-,+[-[>>++++[>++++++++<-]<+<-[>+>+>-[>>>]<[[>+<-]>>+>]<<<<<-]]>>>[-]+>--[-[<->+++[-]]]<[++++++++++++<[>-[>+>>]>[+[<+>-]>+>>]<<<<<-]>>[<+>-]>[-[-<<[-]>>]<<[<<->>-]>>]<<[<<+>>-]]<[-]<.[-]<-,+]"
-input_string = "Jordan Ribera"
-print brain_luck(code, input_string + chr(255));
+def rot13(message):
+    rot13_code = "-,+[-[>>++++[>++++++++<-]<+<-[>+>+>-[>>>]<[[>+<-]>>+>]<<<<<-]]>>>[-]+>--[-[<->+++[-]]]<[++++++++++++<[>-[>+>>]>[+[<+>-]>+>>]<<<<<-]>>[<+>-]>[-[-<<[-]>>]<<[<<->>-]>>]<<[<<+>>-]]<[-]<.[-]<-,+]"
+    return brain_fuck_it(rot13_code, message + chr(255))
+    pass
