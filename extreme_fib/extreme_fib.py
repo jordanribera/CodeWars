@@ -1,11 +1,17 @@
 def fib(n):
-    print "n: " + str(n)
     abs_n = abs(n)
-    a, b = 0, 1
-    for i in range(0, abs_n):
-        if n < 0:
-            a, b = b, a - b
+    if n < 0 and (n % 2 == 0):
+        return 0 - bigfib(abs_n)[0]
+    return bigfib(abs_n)[0]
+
+def bigfib(n):
+    if n == 0:
+        return (0, 1)
+    else:
+        a, b = bigfib(n // 2)
+        c = a * (b * 2 - a)
+        d = a * a + b * b
+        if n % 2 == 0:
+            return (c, d)
         else:
-            a, b = b, a + b
-    #print "a: " + str(a)
-    return a
+            return (d, c + d)
