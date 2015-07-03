@@ -8,15 +8,16 @@ class User:
         rank_spectrum.remove(0)
         
         rank_diff = rank_spectrum.index(prog_rank) - rank_spectrum.index(self.rank)
-        if rank_diff >= 0:
+        if rank_diff == 0:
             new_progress = 3
-            if rank_diff != 0:
-                new_progress = 10*rank_diff*rank_diff
+        elif rank_diff > 0:
+            new_progress = 10*rank_diff*rank_diff
+        elif rank_diff < -2:
+            new_progress = 0
         else:
             new_progress = 1
-            if rank_diff < -2:
-                new_progress = 0
         self.progress += new_progress
+        
         while self.progress >= 100:
             self.progress -= 100
             self.rank = rank_spectrum[rank_spectrum.index(self.rank) + 1]
