@@ -3,31 +3,34 @@ def sudoku(puzzle):
     while solved is not True:
         solved = True
         possibilities = getPossibilities(puzzle)
-        for rowNum in range (0,9):
-            for colNum in range (0,9):
+        for rowNum in range(0, 9):
+            for colNum in range(0, 9):
                 if puzzle[rowNum][colNum] == 0:
                     solved = False
                     if len(possibilities[rowNum][colNum]) == 1:
-                        puzzle[rowNum][colNum] = possibilities[rowNum][colNum][0]
+                        puzzle[rowNum][colNum] = (
+                            possibilities[rowNum][colNum][0]
+                        )
 
     return puzzle
-    
+
+
 def getPossibilities(puzzle):
-    columns = [[],[],[],[],[],[],[],[],[]]
-    for rowNum in range (0,9):
-        for colNum in range (0,9):
+    columns = [[], [], [], [], [], [], [], [], []]
+    for rowNum in range(0, 9):
+        for colNum in range(0, 9):
             columns[colNum].append(puzzle[rowNum][colNum])
-    
-    boxes = [[],[],[],[],[],[],[],[],[]]
-    for rowNum in range (0,9):
-        for colNum in range (0,9):
+
+    boxes = [[], [], [], [], [], [], [], [], []]
+    for rowNum in range(0, 9):
+        for colNum in range(0, 9):
             whichBox = (rowNum / 3) * 3 + (colNum / 3)
             boxes[whichBox].append(puzzle[rowNum][colNum])
-            
-    possibilities = [[],[],[],[],[],[],[],[],[]]
-    for rowNum in range (0,9):
-        for colNum in range (0,9):
-            possibilities[rowNum].append([1,2,3,4,5,6,7,8,9])
+
+    possibilities = [[], [], [], [], [], [], [], [], []]
+    for rowNum in range(0, 9):
+        for colNum in range(0, 9):
+            possibilities[rowNum].append([1, 2, 3, 4, 5, 6, 7, 8, 9])
             for thisRowInstance in set(puzzle[rowNum]):
                 if thisRowInstance in possibilities[rowNum][colNum]:
                     possibilities[rowNum][colNum].remove(thisRowInstance)
@@ -38,5 +41,5 @@ def getPossibilities(puzzle):
             for thisBoxInstance in set(boxes[boxNum]):
                 if thisBoxInstance in possibilities[rowNum][colNum]:
                     possibilities[rowNum][colNum].remove(thisBoxInstance)
-                
+
     return possibilities

@@ -4,6 +4,7 @@ def fib(n):
         return 0 - bigfib(abs_n)[0]
     return bigfib(abs_n)[0]
 
+
 def bigfib(n):
     if n == 0:
         return (0, 1)

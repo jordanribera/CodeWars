@@ -1,4 +1,4 @@
-def Xbonacci(signature,n):
+def Xbonacci(signature, n):
     bracket = len(signature)
     for x in range(0, n - bracket):
         newValue = 0

@@ -1,4 +1,6 @@
 import random
+
+
 class Ghost(object):
 
     def __init__(self):
