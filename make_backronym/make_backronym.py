@@ -3,5 +3,5 @@ def make_backronym(acronym):
     output = []
     for letter in acronym:
         output.append(dictionary[letter.upper()])
-        
+
     return ' '.join(output)

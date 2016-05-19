@@ -1,4 +1,4 @@
-def largest(n,xs):
+def largest(n, xs):
     xs = sorted(xs)
     while len(xs) > n:
         del xs[0]

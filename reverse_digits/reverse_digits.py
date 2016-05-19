@@ -3,5 +3,5 @@ def digitize(n):
     digits.reverse()
     for i in range(0, len(digits)):
         digits[i] = int(digits[i])
-    
+
     return digits

@@ -1,6 +1,7 @@
 import string
 from codecs import encode as _dont_use_this_
 
+
 def brain_fuck_it(code, input):
     code = list(code)
     input_queue = [0]
@@ -13,29 +14,29 @@ def brain_fuck_it(code, input):
     running = True
     while running:
         command = code[code_pointer]
-        #print command
+        # print command
         if command == ">":
-            #increment pointer
+            # increment pointer
             data_pointer += 1
             if len(heap) <= data_pointer:
                 heap.append(0)
         elif command == "<":
-            #decrement pointer
+            # decrement pointer
             data_pointer -= 1
         elif command == "+":
-            #increment value
+            # increment value
             heap[data_pointer] = (heap[data_pointer] + 1) % 256
         elif command == "-":
-            #decrement
+            # decrement
             heap[data_pointer] = (heap[data_pointer] - 1) % 256
         elif command == ".":
-            #output
+            # output
             output = output + chr(heap[data_pointer])
         elif command == ",":
-            #input
+            # input
             heap[data_pointer] = ord(input_queue.pop())
         elif command == "[":
-            #blockstart
+            # blockstart
             if heap[data_pointer] == 0:
                 search_point = code_pointer
                 seeking_blocks = 1
@@ -48,7 +49,7 @@ def brain_fuck_it(code, input):
                         found_blocks += 1
                 code_pointer = search_point
         elif command == "]":
-            #blockend
+            # blockend
             if heap[data_pointer] != 0:
                 search_point = code_pointer
                 seeking_blocks = 1
@@ -62,13 +63,14 @@ def brain_fuck_it(code, input):
                 code_pointer = search_point
 
         code_pointer += 1
-        
+
         if code_pointer == len(code):
             running = False
 
     return output
 
+
 def rot13(message):
-    rot13_code = "-,+[-[>>++++[>++++++++<-]<+<-[>+>+>-[>>>]<[[>+<-]>>+>]<<<<<-]]>>>[-]+>--[-[<->+++[-]]]<[++++++++++++<[>-[>+>>]>[+[<+>-]>+>>]<<<<<-]>>[<+>-]>[-[-<<[-]>>]<<[<<->>-]>>]<<[<<+>>-]]<[-]<.[-]<-,+]"
+    rot13_code = "-,+[-[>>++++[>++++++++<-]<+<-[>+>+>-[>>>]<[[>+<-]>>+>]<<<<<-]]>>>[-]+>--[-[<->+++[-]]]<[++++++++++++<[>-[>+>>]>[+[<+>-]>+>>]<<<<<-]>>[<+>-]>[-[-<<[-]>>]<<[<<->>-]>>]<<[<<+>>-]]<[-]<.[-]<-,+]"  # noqa
     return brain_fuck_it(rot13_code, message + chr(255))
     pass

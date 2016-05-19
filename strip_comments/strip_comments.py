@@ -1,4 +1,4 @@
-def solution(string,markers):
+def solution(string, markers):
     lines = string.split("\n")
     for line in range(len(lines)):
         for marker in markers:

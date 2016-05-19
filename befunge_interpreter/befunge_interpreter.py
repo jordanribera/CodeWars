@@ -1,5 +1,6 @@
 import random
 
+
 def interpret(code):
     output = ""
     direction = "right"
@@ -14,18 +15,18 @@ def interpret(code):
     stack = []
     stringMode = False
     while (running):
-        #read pointer location
+        # read pointer location
         value = code[pointerY][pointerX]
-        
+
         if (value == "\""):
             stringMode = not stringMode
         else:
-            
+
             if (stringMode):
                 stack.append(ord(value))
-            
-            if (stringMode == False):
-                #simple flow
+
+            if (stringMode is False):
+                # simple flow
                 if (value == "^"):
                     direction = "up"
                 if (value == "v"):
@@ -34,10 +35,10 @@ def interpret(code):
                     direction = "left"
                 if (value == ">"):
                     direction = "right"
-                    
-                #advanced flow
+
+                # advanced flow
                 if (value == "?"):
-                    direction = directions[random.randint(0,3)]
+                    direction = directions[random.randint(0, 3)]
                 if (value == "_"):
                     a = stack.pop()
                     if (a == 0):
@@ -51,7 +52,7 @@ def interpret(code):
                     else:
                         direction = "up"
                 if (value == "#"):
-                    #move the pointer
+                    # move the pointer
                     if (direction == "up"):
                         pointerY = (pointerY - 1) % len(code)
                     if (direction == "down"):
@@ -63,8 +64,8 @@ def interpret(code):
                 if (value == "@"):
                     running = False
                     return output
-                        
-                #misc stack manipulation
+
+                # misc stack manipulation
                 if (value == ":"):
                     if (len(stack) == 0):
                         stack.append(0)
@@ -82,36 +83,36 @@ def interpret(code):
                         stack.append(b)
                 if (value == "$"):
                     a = stack.pop()
-                
-                #output
+
+                # output
                 if (value == "."):
                     output = output + str(stack.pop())
                 if (value == ","):
                     output = output + chr(stack.pop())
-                    
-                #numbers onto stack
+
+                # numbers onto stack
                 if representsInt(value):
                     stack.append(int(value))
-                    
-                #addition
+
+                # addition
                 if (value == "+"):
                     a = stack.pop()
                     b = stack.pop()
                     stack.append(a+b)
-                    
-                #subtraction
+
+                # subtraction
                 if (value == "-"):
                     a = stack.pop()
                     b = stack.pop()
                     stack.append(b-a)
-                
-                #multiplication
+
+                # multiplication
                 if (value == "*"):
                     a = stack.pop()
                     b = stack.pop()
                     stack.append(a*b)
-                    
-                #integer division
+
+                # integer division
                 if (value == "/"):
                     a = stack.pop()
                     b = stack.pop()
@@ -119,25 +120,25 @@ def interpret(code):
                         stack.append(0)
                     else:
                         stack.append(b//a)
-                        
-                #modulus
+
+                # modulus
                 if (value == "%"):
                     a = stack.pop()
                     b = stack.pop()
                     if (a == 0):
                         stack.append(0)
                     else:
-                        stack.append(b%a)
-                        
-                #logical not
+                        stack.append(b % a)
+
+                # logical not
                 if (value == "!"):
                     a = stack.pop()
                     if (a == 0):
                         stack.append(1)
                     else:
                         stack.append(0)
-                        
-                #greater than
+
+                # greater than
                 if (value == "`"):
                     a = stack.pop()
                     b = stack.pop()
@@ -145,13 +146,13 @@ def interpret(code):
                         stack.append(1)
                     else:
                         stack.append(0)
-                        
-                #p and g
+
+                # p and g
                 if (value == "p"):
                     y = stack.pop()
                     x = stack.pop()
                     v = stack.pop()
-                    
+
                     v = chr(v)
                     code[y][x] = v
                 if (value == "g"):
@@ -159,10 +160,10 @@ def interpret(code):
                     x = stack.pop()
                     v = code[y][x]
                     v = ord(v)
-                    
+
                     stack.append(v)
-        
-        #move the pointer
+
+        # move the pointer
         if (direction == "up"):
             pointerY = (pointerY - 1) % len(code)
         if (direction == "down"):
@@ -171,13 +172,14 @@ def interpret(code):
             pointerX = (pointerX - 1) % (len(code[0]) + 1)
         if (direction == "right"):
             pointerX = (pointerX + 1) % (len(code[0]) + 1)
-        #safeCounter = safeCounter + 1
+        # safeCounter = safeCounter + 1
         if (safeCounter > 1000):
             running = False
     return output
-    
+
+
 def representsInt(s):
-    try: 
+    try:
         int(s)
         return True
     except ValueError:
